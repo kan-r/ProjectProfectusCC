@@ -4,11 +4,11 @@
 * **pcc-web** - Front-end app developed using React
 
 # Business logic and Assumptions
-For a Product 
-	there is only one purchase price
-	multiple purchases can be made with the same purchase price
-	multiple sales can be made with the different sale price
-	prices are assumed as price per an item
+## For a Product 
+* there is only one purchase price
+* multiple purchases can be made with the same purchase price
+* multiple sales can be made with the different sale price
+* prices are assumed as price per an item
 	
 # Seup instructions
 * Create database using the script (./dbScripts/profectusdb.sql)
