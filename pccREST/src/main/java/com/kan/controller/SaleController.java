@@ -27,7 +27,7 @@ public class SaleController {
 	}
 
 	@PostMapping("")
-	public Sale add(@RequestBody Sale sale) throws InvalidDataException{
+	public Sale addSale(@RequestBody Sale sale) throws InvalidDataException{
 		return saleService.addSale(sale);
 	}
 

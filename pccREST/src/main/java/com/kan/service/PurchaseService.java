@@ -59,7 +59,7 @@ public class PurchaseService {
 	}
 
 	public Purchase addPurchase(Purchase purch) throws InvalidDataException {
-		logger.info("add({})", purch);
+		logger.info("addPurchase({})", purch);
 		
 		if(purch.getProdCode().isBlank()) {
 			throw new InvalidDataException("Product Code is required");

@@ -1,6 +1,6 @@
 package com.kan.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
@@ -27,9 +25,10 @@ public class Sale {
 	@Column(name = "prod_code")
 	private String prodCode;
 	
-	@Temporal(TemporalType.DATE)
+//	handled by com.kan.util.LocalDateAttributeConverter
+//	@Temporal(TemporalType.DATE)
     @Column(name="sales_date", length=7)
-    private Date salesDate;
+    private LocalDate salesDate;
 	
 	@Column(name = "sales_qty")
 	private int salesQty;
@@ -60,7 +59,17 @@ public class Sale {
 		this.product = product;
 	}
 	
-	public Sale(int salesId, String prodCode, Date salesDate, int salesQty, double salesPrice, Product product,
+	public Sale(String prodCode, LocalDate salesDate, int salesQty, double salesPrice, String category, String prodName) {
+		super();
+		this.prodCode = prodCode;
+		this.salesDate = salesDate;
+		this.salesQty = salesQty;
+		this.salesPrice = salesPrice;
+		this.category = category;
+		this.prodName = prodName;
+	}
+	
+	public Sale(int salesId, String prodCode, LocalDate salesDate, int salesQty, double salesPrice, Product product,
 			String category, String prodName) {
 		super();
 		this.salesId = salesId;
@@ -90,11 +99,11 @@ public class Sale {
 		this.prodCode = prodCode;
 	}
 
-	public Date getSalesDate() {
+	public LocalDate getSalesDate() {
 		return salesDate;
 	}
 
-	public void setSalesDate(Date salesDate) {
+	public void setSalesDate(LocalDate salesDate) {
 		this.salesDate = salesDate;
 	}
 

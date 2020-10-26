@@ -1,7 +1,7 @@
 package com.kan.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +48,7 @@ public class SaleService {
 	EntityManager entityManager;
 	
 	public List<Sale> getSaleListByLimit(int limit) {
-		logger.info("getList({})", limit);
+		logger.info("getSaleListByLimit({})", limit);
 		
 		if(limit <= 0) {
 			return null;
@@ -66,8 +66,8 @@ public class SaleService {
 		return saleList;
 	}
 	
-	public List<Sale> getSaleListByCiteria(Map<String,String> params) throws InvalidDataException {
-		logger.info("getAll({})", params);
+	public List<Sale> getSaleListByCiteria(Map<String,String> params) {
+		logger.info("getSaleListByCiteria({})", params);
 		
 //		params -> catId=1&prodCodes=1234,2345&priceFrom=200&priceTo=300&dateFrom=2020-06-14&dateTo=2020-07-23
 		
@@ -98,12 +98,12 @@ public class SaleService {
 		}
 		
 		if(!params.get("dateFrom").isEmpty()) {
-			Date dateFrom = GenUtils.toDate(params.get("dateFrom"));
+			LocalDate dateFrom = GenUtils.toDate(params.get("dateFrom"));
 			pred.add(cb.greaterThanOrEqualTo(sale.get("salesDate"), dateFrom));
 		}
 		
 		if(!params.get("dateTo").isEmpty()) {
-			Date dateTo = GenUtils.toDate(params.get("dateTo"));
+			LocalDate dateTo = GenUtils.toDate(params.get("dateTo"));
 			pred.add(cb.lessThanOrEqualTo(sale.get("salesDate"), dateTo));
 		}
 		
@@ -115,7 +115,7 @@ public class SaleService {
 	}
 	
 	public Sale addSale(Sale sale) throws InvalidDataException {
-		logger.info("add({})", sale);
+		logger.info("addSale({})", sale);
 		
 		if(sale.getProdCode().isBlank()) {
 			throw new InvalidDataException("Product Code is required");
@@ -151,5 +151,4 @@ public class SaleService {
 		
 		return saleDao.save(sale);
 	}
-
 }

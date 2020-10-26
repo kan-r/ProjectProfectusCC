@@ -18,6 +18,18 @@ public class Profit {
 		this.amount = amount;
 	}
 	
+	
+	public Profit() {
+		super();
+	}
+	
+	public Profit(String type, double amount) {
+		super();
+		this.type = type;
+		this.amount = amount;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Profit [type=" + type + ", amount=" + amount + "]";

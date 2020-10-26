@@ -21,6 +21,7 @@ public class ProfitService {
 	private SaleService saleService;
 
 	public Profit getProfit(Map<String,String> params) throws InvalidDataException {
+		logger.info("getProfit({})", params);
 		
 		Profit profit = new Profit();
 		

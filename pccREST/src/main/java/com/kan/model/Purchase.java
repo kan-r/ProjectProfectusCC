@@ -1,7 +1,7 @@
 package com.kan.model;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
@@ -28,9 +26,10 @@ public class Purchase {
 	@Column(name = "prod_code")
 	private String prodCode;
 	
-	@Temporal(TemporalType.DATE)
+//	handled by com.kan.util.LocalDateAttributeConverter
+//	@Temporal(TemporalType.DATE)
     @Column(name="purch_date", length=7)
-    private Date purchDate;
+    private LocalDate purchDate;
 	
 	@Column(name = "purch_qty")
 	private int purchQty;
@@ -38,7 +37,7 @@ public class Purchase {
 	@Column(name = "purch_price")
 	private double purchPrice;
 	
-	@ManyToOne(fetch=FetchType.EAGER, optional=true)
+	@ManyToOne(fetch=FetchType.EAGER, optional=false)
 	@JoinColumn(name = "prod_code", insertable = false, updatable = false)
 	private Product product;
 	
@@ -61,8 +60,18 @@ public class Purchase {
 		this.purchPrice = purchPrice;
 		this.product = product;
 	}
+	
+	public Purchase(String prodCode, LocalDate purchDate, int purchQty, double purchPrice, String category, String prodName) {
+		super();
+		this.prodCode = prodCode;
+		this.purchDate = purchDate;
+		this.purchQty = purchQty;
+		this.purchPrice = purchPrice;
+		this.category = category;
+		this.prodName = prodName;
+	}
 
-	public Purchase(int purchId, String prodCode, Date purchDate, int purchQty, double purchPrice, Product product,
+	public Purchase(int purchId, String prodCode, LocalDate purchDate, int purchQty, double purchPrice, Product product,
 			String category, String prodName) {
 		super();
 		this.purchId = purchId;
@@ -92,11 +101,11 @@ public class Purchase {
 		this.prodCode = prodCode;
 	}
 
-	public Date getPurchDate() {
+	public LocalDate getPurchDate() {
 		return purchDate;
 	}
 
-	public void setPurchDate(Date purchDate) {
+	public void setPurchDate(LocalDate purchDate) {
 		this.purchDate = purchDate;
 	}
 

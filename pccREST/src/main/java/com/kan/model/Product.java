@@ -48,7 +48,6 @@ public class Product {
 		this.catId = catId;
 		this.category = category;
 	}
-
 	
 	public String getProdCode() {
 		return prodCode;

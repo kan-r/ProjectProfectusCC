@@ -22,12 +22,12 @@ public class CategoryService {
 	private CategoryDao categoryDao;
 
 	public List<Category> getCategoryList(){
-		logger.info("getAll()");
+		logger.info("getCategoryList()");
 		return categoryDao.findAll(Sort.by("category"));
 	}
 	
 	public Category addCategoryIfNotExists(Category category){
-		logger.info("addCategory({})", category);
+		logger.info("addCategoryIfNotExists({})", category);
 		
 		Category cat = categoryDao.findByCategory(category.getCategory());
 		if(cat != null) {

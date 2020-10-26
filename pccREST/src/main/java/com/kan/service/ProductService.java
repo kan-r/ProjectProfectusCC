@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,7 @@ public class ProductService {
 
 	public List<Product> getProductList() {
 		logger.info("getProductList()");
-		return productDao.findAll();
+		return productDao.findAll(Sort.by("prodCode"));
 	}
 
 	public Product getProduct(String prodCode) {
@@ -39,7 +40,7 @@ public class ProductService {
 	}
 	
 	public Product addProductIfNotExists(Product product) {
-		logger.info("add({})", product);
+		logger.info("addProductIfNotExists({})", product);
 		
 		Product prod = getProduct(product.getProdCode());
 		if(prod != null) {
@@ -50,7 +51,7 @@ public class ProductService {
 	}
 	
 	public Product upsertProduct(Product product) throws InvalidDataException {
-		logger.info("upsert({})", product);
+		logger.info("upsertProduct({})", product);
 		
 		Product prod = getProduct(product.getProdCode());
 		if(prod != null) {
